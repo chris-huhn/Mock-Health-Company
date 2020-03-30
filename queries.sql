@@ -13,6 +13,21 @@ FROM members
 GROUP BY State
 ORDER BY Perecentage_of_Total DESC;
 
++----------------+-------------------+----------------------+
+| State          | Members per State | Perecentage_of_Total |
++----------------+-------------------+----------------------+
+| Pennsylvania   |               914 | 9.14%                |
+| New Jersey     |               686 | 6.86%                |
+| Massachusetts  |               677 | 6.77%                |
+| Virginia       |               591 | 5.91%                |
+| North Carolina |               460 | 4.60%                |
+| California     |               430 | 4.30%                |
+| Ohio           |               429 | 4.29%                |
+| Maryland       |               333 | 3.33%                |
+| Florida        |               253 | 2.53%                |
+| Colorado       |               252 | 2.52%                |
+| Illinois       |               249 | 2.49%                |
+
 -- 2. Number of providers per member, grouped by state
 
 SELECT 
