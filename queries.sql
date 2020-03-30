@@ -13,6 +13,7 @@ FROM members
 GROUP BY State
 ORDER BY Perecentage_of_Total DESC
 LIMIT 10;
+
 -- Output 1
 +----------------+-------------------+----------------------+
 | State          | Members per State | Perecentage_of_Total |
@@ -28,6 +29,7 @@ LIMIT 10;
 | Florida        |               253 | 2.53%                |
 | Colorado       |               252 | 2.52%                |
 +----------------+-------------------+----------------------+
+
 
 -- 2. Number of providers per member, grouped by state
 
@@ -51,6 +53,7 @@ INNER JOIN
 ON A.State = B.State
 ORDER BY Providers_per_Member DESC
 LIMIT 10;
+
 -- Output 2
 +--------------+---------+-----------+----------------------+
 | State        | Members | Providers | Providers_per_Member |
@@ -67,9 +70,8 @@ LIMIT 10;
 | Kansas       |      44 |        25 |                 0.57 |
 +--------------+---------+-----------+----------------------+
 
--- 3. Claim accuracy
 
--- Are in-network claims paid in compliance with state-required minimum payouts?
+-- 3. Claim accuracy--are in-network claims paid in compliance with state-required minimum payouts?
       
     -- 3a. Show all underpaid medical claims
     SELECT 
@@ -87,6 +89,7 @@ LIMIT 10;
         procedure_claims.Network_Status = "In-Network"
         AND ROUND(procedure_claims.Payout/procedure_claims.Cost, 2) < states.Medical_Cost_Share
     LIMIT 10;
+    
     -- Output 3a
     +----------+----------------+------+--------+-----------+---------------+------------------+
     | Claim_ID | State          | Cost | Payout | Paid_Rate | Required_Rate | Amount_Underpaid |
@@ -120,6 +123,7 @@ LIMIT 10;
     GROUP BY procedure_claims.State
     ORDER BY Amount_Underpaid DESC
     LIMIT 10;
+    
     -- -- Output 3b
     +----------------+--------------+------------+--------------+------------------+
     | State          | Total_Claims | Total_Cost | Total_Payout | Amount_Underpaid |
@@ -146,8 +150,8 @@ LIMIT 10;
     ON procedure_claims.State = states.State
     WHERE 
         procedure_claims.Network_Status = "In-Network"
-        AND ROUND(procedure_claims.Payout/procedure_claims.Cost, 2) < states.Medical_Cost_Share
-    ;
+        AND ROUND(procedure_claims.Payout/procedure_claims.Cost, 2) < states.Medical_Cost_Share;
+        
     -- Output 3c
     +------------------+------------------+
     | Underpaid_Claims | Amount_Underpaid |
